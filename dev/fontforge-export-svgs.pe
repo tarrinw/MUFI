@@ -1,0 +1,6 @@
+# FontForge (ff) script to export all glyphs as svgs
+# run in FontForge itself or on command line fontforge -lang=ff -script fontforge-export-svgs.pe
+SelectAll()
+UnlinkReference()
+# will write svgs to home dir in MacOS, but full path will be needed in Windows
+Export("ffglyph-%n-%e.svg")
