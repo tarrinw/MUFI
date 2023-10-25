@@ -8,7 +8,7 @@ my $id = shift @ARGV;
 # sql in printf format
 my $sqlf = q{
 INSERT INTO mufi_font_glyph (mufi_font_id,name,codepoint,svg_viewbox,svg_path_d,
-	  svg_viewbox_x,svg_viewbox_y,svg_viewbox_w,svg_viewbox_h) 
+	  svg_viewbox_x,svg_viewbox_y,svg_viewbox_w,svg_viewbox_h)
 	VALUES (%d,'%s',%d,'%s','%s',%d,%d,%d,%d);
 };
 # go through each glyph file
@@ -21,7 +21,7 @@ for (@ARGV) {
   $vb =~ s/^ //;
   $vb =~ s/ $//;
   my ($d)  = $file_content =~ /\sd="([^"]+)/s;
-  my ($x, $y, $w, $h) = $vb =~ /^([0-9-]+) ([0-9-]+) ([0-9-]+) ([0-9]+)$/; 
-  my ($name, $cp) = /^ffglyph-(.+?)-(\d+)\.svg/;
+  my ($x, $y, $w, $h) = $vb =~ /^([0-9-]+) ([0-9-]+) ([0-9-]+) ([0-9]+)$/;
+  my ($name, $cp) = $_ =~ /ffglyph-(.+?)-(\d+)\.svg/;
   printf $sqlf, $id, $name, $cp, $vb, $d, $x, $y, $w, $h;
 }
